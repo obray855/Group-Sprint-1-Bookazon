@@ -80,12 +80,11 @@ public class User {
     }
 
     public void checkout() {
-        Order order = new Order(cart, this.subscription);
+        Order order = new Order(cart, this);
         order.setShippingAddress("123 Main St", "", "Springfield", "IL", "62701", "USA");
         order.setBillingAddress("123 Main St", "", "Springfield", "IL", "62701", "USA");
         order.setOrderStatus("Order Placed");
         order.setDateCreated("2024-01-01");
-        order.setUserName(this.name);
         orders.add(order);
     }
 }

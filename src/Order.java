@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Order {
     private String dateCreated;
     private String dateShipped;
-    private String userName;
+    private User orderUser;
     private String orderStatus;
     private String shippingAddressLine1;
     private String shippingAddressLine2;
@@ -20,9 +20,10 @@ public class Order {
     private ArrayList<CartItem> items;
     private double orderPrice;
 
-    public Order(Cart cart, String subscription) {
+    public Order(Cart cart, User orderUser) {
         this.items = cart.getItems();
-        this.orderPrice = calculatePrice(subscription);
+        this.orderUser = orderUser;
+        this.orderPrice = calculatePrice();
     }
 
     public void setShippingAddress(String line1, String line2, String city, String state, String zip, String country) {
@@ -55,15 +56,11 @@ public class Order {
         this.dateShipped = date;
     }
 
-    public void setUserName(String name) {
-        this.userName = name;
-    }
-
     public void printOrderDetails() {
         System.out.println("Order Details:");
         System.out.println("Date Created: " + dateCreated);
         System.out.println("Date Shipped: " + dateShipped);
-        System.out.println("User Name: " + userName);
+        System.out.println("User Name: " + orderUser.getName());
         System.out.println("Order Status: " + orderStatus);
         System.out.println("Shipping Address: " + shippingAddressLine1 + ", " + shippingAddressLine2 + ", " + shippingAddressCity + ", " + shippingAddressState + ", " + shippingAddressZip + ", " + shippingAddressCountry);
         System.out.println("Billing Address: " + billingAddressLine1 + ", " + billingAddressLine2 + ", " + billingAddressCity + ", " + billingAddressState + ", " + billingAddressZip + ", " + billingAddressCountry);
@@ -71,6 +68,7 @@ public class Order {
     }
 
     public double calculatePrice(String subscription) {
+        // make sure that .orderUser subscription reference is used in update
         double totalPrice = 0.0;
 
         for (CartItem item : items) {
