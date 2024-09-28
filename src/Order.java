@@ -10,10 +10,11 @@ public class Order {
     private ArrayList<CartItem> items;
     private double orderPrice;
 
-    public Order(Cart cart, String subscription) {
+    public Order(Cart cart, User orderUser) {
         this.items = cart.getItems();
         this.orderPrice = calculatePrice(subscription);
         this.orderPlaced = false;
+
     }
 
     public void setShippingAddress(String line1, String line2, String city, String state, String zip, String country) {
@@ -40,10 +41,6 @@ public class Order {
         this.dateShipped = date;
     }
 
-    public void setUserName(String name) {
-        this.userName = name;
-    }
-
     public void printOrderDetails() {
         System.out.println("Order Details:");
         System.out.println("Date Created: " + dateCreated);
@@ -52,10 +49,12 @@ public class Order {
         System.out.println("Order Placed: " + orderPlaced);
         System.out.println("Shipping Address: " + shippingAddress.printAddress());
         System.out.println("Billing Address: " + billingAddress.printAddress());
+
         System.out.println("Order Price: $" + orderPrice);
     }
 
     public double calculatePrice(String subscription) {
+        // make sure that .orderUser subscription reference is used in update
         double totalPrice = 0.0;
 
         for (CartItem item : items) {
