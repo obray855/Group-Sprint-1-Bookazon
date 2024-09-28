@@ -8,6 +8,7 @@ public class User {
     private ArrayList<Order> orders;
     private Address shippingAddress;
     private Address billingAddress;
+    private boolean orderPlaced;
 
     public User(String name, String subscription) {
         this.name = name;
@@ -33,11 +34,15 @@ public class User {
     }
 
     public void setShippingAddress(String line1, String line2, String city, String state, String zip, String country) {
+        if (!this.orderPlaced){
         this.shippingAddress.setAddress(line1, line2, city, state, zip, country);
+        }
     }
 
     public void setBillingAddress(String line1, String line2, String city, String state, String zip, String country) {
+        if (!this.orderPlaced){
         this.billingAddress.setAddress(line1, line2, city, state, zip, country);
+       }
     }
 
     public void addToCart(Book book, int quantity) {
