@@ -83,7 +83,7 @@ public class User {
         Order order = new Order(cart, this);
         order.setShippingAddress("123 Main St", "", "Springfield", "IL", "62701", "USA");
         order.setBillingAddress("123 Main St", "", "Springfield", "IL", "62701", "USA");
-        order.setOrderStatus("Order Placed");
+        order.setPlaced(true);
         order.setDateCreated("2024-01-01");
         orders.add(order);
     }
