@@ -15,13 +15,18 @@ public class Cart {
         items.remove(item);
     }
     
-    public void updateQuantity(CartItem item, int quantity) {
-        for (CartItem cartItem : items) {
-            if (cartItem.equals(item)) {
-                cartItem.setQuantity(quantity);
-                break;
+    public CartItem findItem(CartItem item){
+        for (CartItem cartItem : items){
+            if (cartItem.equals(item)){
+                return item;
+                }
             }
-        }
+            return null;
+        }   
+
+    public void updateQuantity(CartItem item, int quantity) {
+        CartItem cartItem = findItem(item);
+        cartItem.setQuantity(quantity);        
     }
     
     public void viewCartDetails() {
