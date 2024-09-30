@@ -13,6 +13,8 @@ public class Order {
 
     public Order(Cart cart, User orderUser) {
         this.items = cart.getItems();
+        this.shippingAddress = new Address();
+        this.billingAddress = new Address();
         this.orderUser = orderUser;
         this.orderPrice = calculatePrice();
         this.orderPlaced = false;

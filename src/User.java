@@ -11,6 +11,8 @@ public class User {
 
     public User(String name, Subscription subscription) {
         this.name = name;
+        this.shippingAddress = new Address();
+        this.billingAddress = new Address();
         this.subscription = subscription;  // normal, gold, platinum, silver membership
         this.cart = new Cart();
         this.orders = new ArrayList<>();
