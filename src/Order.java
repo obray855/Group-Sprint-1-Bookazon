@@ -19,12 +19,11 @@ public class Order {
     private String billingAddressCountry;
     private ArrayList<CartItem> items;
     private double orderPrice;
-    private Subscription subscription;
 
     public Order(Cart cart, User orderUser) {
         this.items = cart.getItems();
         this.orderUser = orderUser;
-        this.orderPrice = calculatePrice(subscription);
+        this.orderPrice = calculatePrice();
     }
 
     public void setShippingAddress(String line1, String line2, String city, String state, String zip, String country) {
@@ -68,15 +67,17 @@ public class Order {
         System.out.println("Order Price: $" + orderPrice);
     }
 
-    public double calculatePrice(Subscription subscription) {
+    public double calculatePrice() {
         // make sure that .orderUser subscription reference is used in update
         double totalPrice = 0.0;
 
         for (CartItem item : items) {
             totalPrice += item.getTotalPrice();
         }
+
+        Subscription sub = orderUser.getSubscription();
         
-        totalPrice -= subscription.calculate(totalPrice);
+        totalPrice -= sub.calculate(totalPrice);
 
         return totalPrice;
     }
