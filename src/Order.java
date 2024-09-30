@@ -53,7 +53,7 @@ public class Order {
         System.out.println("Order Price: $" + orderPrice);
     }
 
-    public double calculatePrice(String subscription) {
+    public double calculatePrice() {
         // make sure that .orderUser subscription reference is used in update
         double totalPrice = 0.0;
 
@@ -61,13 +61,9 @@ public class Order {
             totalPrice += item.getTotalPrice();
         }
 
-        if (subscription == "gold") {
-            totalPrice *= 0.15; // 15% discount for prime members
-        } else if (subscription == "platinum") {
-            totalPrice *= 0.10; // 10% discount for platinum members
-        } else if (subscription == "silver") {
-            totalPrice *= 0.05; // 5% discount for silver members
-        } 
+        Subscription sub = orderUser.getSubscription();
+        
+        totalPrice -= sub.calculate(totalPrice);
 
         return totalPrice;
     }
