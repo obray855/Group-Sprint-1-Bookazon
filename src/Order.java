@@ -9,10 +9,12 @@ public class Order {
     private Address billingAddress;
     private ArrayList<CartItem> items;
     private double orderPrice;
+    private User orderUser;
 
     public Order(Cart cart, User orderUser) {
         this.items = cart.getItems();
-        this.orderPrice = calculatePrice(subscription);
+        this.orderUser = orderUser;
+        this.orderPrice = calculatePrice();
         this.orderPlaced = false;
 
     }
